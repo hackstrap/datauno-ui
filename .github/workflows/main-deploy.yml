@@ -33,7 +33,7 @@ jobs:
           docker push $IMAGE_NAME
           docker logout docker.pkg.github.com
       - name: Executing remote ssh commands
-        uses: appleboy/ssh-action@v0.1.4
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
           port: ${{ secrets.SSH_PORT }}
