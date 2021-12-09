@@ -1,25 +1,14 @@
-import { Row, Col } from "antd";
-import { withTranslation } from "react-i18next";
-import { SvgIcon } from "../../common/SvgIcon";
-import Container from "../../common/Container";
-
+import { Col, Row } from "antd";
 import i18n from "i18next";
+import { withTranslation } from "react-i18next";
+import Container from "../../common/Container";
+import { SvgIcon } from "../../common/SvgIcon";
 import {
-  FooterSection,
-  Title,
-  NavLink,
-  Extra,
-  LogoContainer,
-  Para,
-  Large,
   Chat,
-  Empty,
-  FooterContainer,
-  Language,
-  Label,
-  LanguageSwitch,
-  LanguageSwitchContainer,
+  Empty, Extra, FooterContainer, FooterSection, Label, Language, LanguageSwitch,
+  LanguageSwitchContainer, Large, LogoContainer, NavLink, Para, Title
 } from "./styles";
+
 
 interface SocialLinkProps {
   href: string;
@@ -56,7 +45,7 @@ const Footer = ({ t }: any) => {
               <Para>
                 {t(`Do you have any question? Feel free to reach out.`)}
               </Para>
-              <a href="mailto:l.qqbadze@gmail.com">
+              <a href="mailto:contact@hackstrap.com">
                 <Chat>{t(`Let's Chat`)}</Chat>
               </a>
             </Col>
@@ -83,9 +72,9 @@ const Footer = ({ t }: any) => {
             <Col lg={10} md={10} sm={12} xs={12}>
               <Empty />
               <Language>{t("Address")}</Language>
-              <Para>Rancho Santa Margarita</Para>
-              <Para>2131 Elk Street</Para>
-              <Para>California</Para>
+              <Para>Dr. AS Rao Nagar</Para>
+              <Para>Hyderabad</Para>
+              <Para>Telangana, India</Para>
             </Col>
             <Col lg={8} md={8} sm={12} xs={12}>
               <Title>{t("Company")}</Title>
