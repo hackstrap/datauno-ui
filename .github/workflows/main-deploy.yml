@@ -32,6 +32,16 @@ jobs:
           docker login -u sandeepdevarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
           docker push $IMAGE_NAME
           docker logout docker.pkg.github.com
+      - name: Executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DIGITAL_OCEAN_IP }}
+          username: ${{ secrets.DIGITAL_OCEAN_USER }}
+          key: ${{ secrets.DIGITAL_OCEAN_KEY }}
+          port: 22
+          script: |
+            echo "what"
+            whoami
           
       # - name: Run deploy script on the server
       #   uses: appleboy/ssh-action@master
