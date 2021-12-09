@@ -39,6 +39,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
+          passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
           script: |
             echo "it is working?"
             whoami
