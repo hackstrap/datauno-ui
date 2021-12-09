@@ -40,7 +40,7 @@ jobs:
           key: ${{ secrets.DEPLOYMENT_KEY }}
           port: 22
           script: |
-            echo "it is working"
+            echo "it is working?"
             whoami
           
       # - name: Run deploy script on the server
