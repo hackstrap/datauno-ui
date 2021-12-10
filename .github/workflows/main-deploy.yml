@@ -26,9 +26,9 @@ jobs:
       - name: Set environmental variable
         run: |
           echo "IMAGE_NAME=$(echo docker.pkg.github.com/${{ github.repository }}/datauno-ui:$(date "+%d%m%y%H%M"))" >> $GITHUB_ENV
-          echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
-          echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
-          echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
+          echo "USERNAME=$(echo ${{ secrets.USERNAME }})" >> $GITHUB_ENV
+          echo "TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }})" >> $GITHUB_ENV
+          echo "REPO=$(echo ${{ github.repository }})" >> $GITHUB_ENV
       - name: Build the Docker image and publish registry
         run: |
           echo $IMAGE_NAME
