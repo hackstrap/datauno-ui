@@ -49,6 +49,10 @@ jobs:
             echo "it is working"
             echo $IMAGE_NAME
             whoami
+            # Change directory to hackstrap
+            echo Changing directory to $HOME/hackstrap
+            cd $HOME/hackstrap
+            echo current directory $PWD
           
       # - name: Run deploy script on the server
       #   uses: appleboy/ssh-action@master
