@@ -36,17 +36,20 @@ jobs:
           docker login -u sandeep-devarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
           docker push $IMAGE_NAME
           docker logout docker.pkg.github.com
-      - name: Executing remote ssh commands
-        uses: appleboy/ssh-action@master
+      - name: ls -a via ssh
+        uses: fifsky/ssh-action@master
         env:
           USERNAME: ${{ secrets.USERNAME }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         with:
+          command: |
+            cd /tmp
+            ls -a
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
-          username: ${{ secrets.DIGITAL_OCEAN_USER }}
+          user: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
-          passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
+          pass: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
           envs: USERNAME,TOKEN,IMAGE_NAME,REPO
           script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
           
