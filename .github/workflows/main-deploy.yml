@@ -46,7 +46,8 @@ jobs:
             whoami
             echo $IMAGE_NAME
             echo Changing directory to $HOME/hackstrap
-            cd $HOME/hackstrap
+            mkdir $HOME/datauno-ui
+            cd $HOME/datauno-ui
             echo current directory $PWD
 
             docker login -u $USERNAME -p $TOKEN docker.pkg.github.com
@@ -54,6 +55,36 @@ jobs:
             docker pull $IMAGE_NAME
 
             echo "Successfully pulled the package"
+
+            echo "Fetching compose file from $REPO..."
+            echo https://api.github.com/repos/$REPO/contents/docker-compose.yml --header "authorization: Bearer "$TOKEN
+            curl $(curl https://api.github.com/repos/$REPO/contents/docker-compose.yml --header "authorization: Bearer "$TOKEN | jq -r '.download_url') > docker-compose.temp.yml
+            if [ $? -ne 0 ]; then
+              echo "Couldn't fetch docker-compose file"
+              exit 1
+            fi
+
+            echo "Compose file merger initiated..."
+            out=$(IMAGE_NAME=$IMAGE_NAME docker-compose -f docker-compose.basic.yml -f docker-compose.temp.yml config)
+            if [ $? -ne 0 ]; then
+              echo "An error occured while merging compose files"
+              exit 2
+            else
+              echo "$out" > docker-compose.basic.yml
+              echo "Successfully written to docker-compose.basic.yml"
+            fi
+
+            echo "Redeploying stack by using new image..."
+            docker stack deploy --with-registry-auth -c docker-compose.basic.yml hackstrap
+            if [ $? -eq 0 ]; then
+              echo "Deployed successfully"
+            else
+              echo "Deployment failed"
+              exit 3
+            fi
+
+            # Logout
+            docker logout docker.pkg.github.com
           
       # - name: Run deploy script on the server
       #   uses: appleboy/ssh-action@master
