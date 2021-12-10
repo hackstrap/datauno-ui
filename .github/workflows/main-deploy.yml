@@ -43,8 +43,11 @@ jobs:
           envs: IMAGE_NAME, USERNAME=${{ secrets.USERNAME }}, TOKEN=${{ secrets.GITHUB_TOKEN }}, REPO=${{ github.repository }}
           script: |
             echo "it is working"
-            whoami
+            whoamis
             echo $IMAGE_NAME
+            echo $USERNAME
+            echo $TOKEN
+            echo $REPO
           # script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
           
       # - name: Run deploy script on the server
