@@ -29,13 +29,13 @@ jobs:
           echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
           echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
           echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
-      # - name: Build the Docker image and publish registry
-      #   run: |
-      #     echo $IMAGE_NAME
-      #     docker build . --file Dockerfile --tag $IMAGE_NAME
-      #     docker login -u sandeep-devarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
-      #     docker push $IMAGE_NAME
-      #     docker logout docker.pkg.github.com
+      - name: Build the Docker image and publish registry
+        run: |
+          echo $IMAGE_NAME
+          docker build . --file Dockerfile --tag $IMAGE_NAME
+          docker login -u sandeep-devarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
+          docker push $IMAGE_NAME
+          docker logout docker.pkg.github.com
       - name: Run deploy script on the server
         uses: appleboy/ssh-action@master
         with:
@@ -45,7 +45,8 @@ jobs:
           passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
           port: 22
           envs: USERNAME,TOKEN,IMAGE_NAME,REPO
-          script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
+          script: whoami
+          # script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
           
       # - name: Run deploy script on the server
       #   uses: appleboy/ssh-action@master
