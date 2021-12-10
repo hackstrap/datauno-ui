@@ -33,7 +33,7 @@ jobs:
           docker push $IMAGE_NAME
           docker logout docker.pkg.github.com
       - name: Executing remote ssh commands
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.4
         env:
           USERNAME: ${{ secrets.USERNAME }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
