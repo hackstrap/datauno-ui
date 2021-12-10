@@ -43,7 +43,7 @@ jobs:
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
           passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
-          port: ${{ secrets.PORT }}
+          port: ${{ secrets.SSH_PORT }}
           script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
           
       # - name: Run deploy script on the server
