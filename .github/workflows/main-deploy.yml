@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  # workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -36,20 +36,13 @@ jobs:
           docker login -u sandeep-devarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
           docker push $IMAGE_NAME
           docker logout docker.pkg.github.com
-      - name: ls -a via ssh
-        uses: fifsky/ssh-action@master
-        env:
-          USERNAME: ${{ secrets.USERNAME }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
+      - name: Run deploy script on the server
+        uses: appleboy/ssh-action@master
         with:
-          command: |
-            cd /tmp
-            ls -a
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
-          user: ${{ secrets.DIGITAL_OCEAN_USER }}
+          username: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
-          pass: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
+          passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
           envs: USERNAME,TOKEN,IMAGE_NAME,REPO
           script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
           
