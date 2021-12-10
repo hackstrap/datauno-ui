@@ -29,7 +29,7 @@ jobs:
         run: |
           echo $IMAGE_NAME
           docker build . --file Dockerfile --tag $IMAGE_NAME
-          docker login -u sandeepdevarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
+          docker login -u sandeep-devarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
           docker push $IMAGE_NAME
           docker logout docker.pkg.github.com
       - name: Executing remote ssh commands
