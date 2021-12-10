@@ -24,11 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Set environmental variable
-        run: |
-          echo "IMAGE_NAME=$(echo docker.pkg.github.com/${{ github.repository }}/datauno-ui:$(date "+%d%m%y%H%M"))" >> $GITHUB_ENV
-          echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
-          echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
-          echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=$(echo docker.pkg.github.com/${{ github.repository }}/datauno-ui:$(date "+%d%m%y%H%M"))" >> $GITHUB_ENV
       - name: Build the Docker image and publish registry
         run: |
           echo $IMAGE_NAME
@@ -36,10 +32,11 @@ jobs:
           docker login -u sandeep-devarapalli -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
           docker push $IMAGE_NAME
           docker logout docker.pkg.github.com
-      - name: Run deploy script on the server
+      - name: Executing remote ssh commands
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
+          port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
           passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
@@ -47,6 +44,7 @@ jobs:
           script: |
             echo "it is working"
             whoami
+            echo $IMAGE_NAME
           # script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
           
       # - name: Run deploy script on the server
