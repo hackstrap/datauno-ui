@@ -43,7 +43,7 @@ jobs:
           script: |
             echo "it is working"
             whoami
-           
+            echo $IMAGE_NAME
           
       # - name: Run deploy script on the server
       #   uses: appleboy/ssh-action@master
