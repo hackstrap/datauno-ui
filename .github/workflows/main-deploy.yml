@@ -44,7 +44,7 @@ jobs:
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
           passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
           port: 22
-          envs: USERNAME,TOKEN,IMAGE_NAME,REPO
+          # envs: USERNAME,TOKEN,IMAGE_NAME,REPO
           script: whoami
           # script: ~/datauno-ui/deploy-script.sh $USERNAME $TOKEN $IMAGE_NAME $REPO
           
