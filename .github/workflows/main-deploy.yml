@@ -34,14 +34,20 @@ jobs:
           docker logout docker.pkg.github.com
       - name: Executing remote ssh commands
         uses: appleboy/ssh-action@master
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         with:
           host: ${{ secrets.DIGITAL_OCEAN_IP }}
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
           passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
+          envs: USERNAME,TOKEN,IMAGE_NAME,REPO
           script: |
             echo "it is working"
+            echo $IMAGE_NAME
             whoami
           
       # - name: Run deploy script on the server
