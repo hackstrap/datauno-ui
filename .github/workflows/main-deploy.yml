@@ -24,7 +24,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Set environmental variable
-        run: echo "IMAGE_NAME=$(echo docker.pkg.github.com/${{ github.repository }}/datauno-ui:$(date "+%d%m%y%H%M"))" >> $GITHUB_ENV
+        run: |
+          echo "IMAGE_NAME=$(echo docker.pkg.github.com/${{ github.repository }}/datauno-ui:$(date "+%d%m%y%H%M"))" >> $GITHUB_ENV
+          echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
+          echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+          echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
       - name: Build the Docker image and publish registry
         run: |
           echo $IMAGE_NAME
@@ -40,10 +44,10 @@ jobs:
           username: ${{ secrets.DIGITAL_OCEAN_USER }}
           key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
           passphrase: ${{ secrets.SSH_DEPLOYMENT_KEY_PASSPHRASE }}
-          envs: IMAGE_NAME, USERNAME=${{ secrets.USERNAME }}, TOKEN=${{ secrets.GITHUB_TOKEN }}, REPO=${{ github.repository }}
+          envs: IMAGE_NAME,USERNAME,TOKEN,REPO
           script: |
             echo "it is working"
-            whoamis
+            whoami
             echo $IMAGE_NAME
             echo $USERNAME
             echo $TOKEN
