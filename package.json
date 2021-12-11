@@ -10,6 +10,7 @@
     "@types/styled-components": "^5.1.17",
     "antd": "^4.17.3",
     "axios": "^0.21.4",
+    "babel-plugin-open-source": "^1.1.0",
     "i18next": "^19.9.2",
     "i18next-browser-languagedetector": "^6.1.2",
     "i18next-xhr-backend": "^3.2.2",

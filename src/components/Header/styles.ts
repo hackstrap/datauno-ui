@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const HeaderSection = styled("header")`
   padding: 1rem 0.5rem;

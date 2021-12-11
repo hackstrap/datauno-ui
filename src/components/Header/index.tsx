@@ -1,19 +1,12 @@
+import { Col, Drawer, Row } from "antd";
 import { useState } from "react";
-import { Row, Col, Drawer } from "antd";
 import { withTranslation } from "react-i18next";
+import { Button } from "../../common/Button";
 import Container from "../../common/Container";
 import { SvgIcon } from "../../common/SvgIcon";
-import { Button } from "../../common/Button";
 import {
-  HeaderSection,
-  LogoContainer,
-  Burger,
-  NotHidden,
-  Menu,
-  CustomNavLinkSmall,
-  Label,
-  Outline,
-  Span,
+  Burger, CustomNavLinkSmall, HeaderSection, Label, LogoContainer, Menu, NotHidden, Outline,
+  Span
 } from "./styles";
 
 const Header = ({ t }: any) => {
@@ -63,7 +56,7 @@ const Header = ({ t }: any) => {
       <Container>
         <Row justify="space-between">
           <LogoContainer to="/" aria-label="homepage">
-            <SvgIcon src="logo.svg" width="101px" height="64px" />
+            <SvgIcon src="logo.svg" width="250px" height="100px" />
           </LogoContainer>
           <NotHidden>
             <MenuItem />
