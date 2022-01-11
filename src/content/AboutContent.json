@@ -1,15 +1,15 @@
 {
-  "title": "Light, fast & responsive",
-  "text": "This template is ready to use, so you don't need to change anything at a component level, unless you want to customize the default styling.",
+  "title": "Data Platform as a Service",
+  "text": "Bring data together and serve it across the company along with the necessary data, computing and working environments",
   "section": [
     {
-      "title": "Why Antd?",
-      "content": "Ant Design is a React UI library that has a lot of easy-to-use components for building elegant UI.",
+      "title": "Self sufficient data teams",
+      "content": "Your data teams can get the data they need, whenever they need it!",
       "icon": "notes.svg"
     },
     {
-      "title": "Why styled-components?",
-      "content": "Styled Components gives you total control over your components.",
+      "title": "Define your data priorities",
+      "content": "If you do things in the right order, leveraging data will be a breeze",
       "icon": "notes.svg"
     }
   ]
